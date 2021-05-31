@@ -1,0 +1,43 @@
+#!/bin/bash
+sudo yum install java-1.8.0-openjdk-devel -y
+
+cd /opt 
+
+sudo yum install git wget -y
+
+sudo wget https://downloads.apache.org/tomcat/tomcat-9/v9.0.43/bin/apache-tomcat-9.0.43.tar.gz
+
+sudo tar -xvf apache-tomcat-9.0.43.tar.gz
+
+sudo rm -rf apache-tomcat-9.0.43.tar.gz
+
+sudo mv apache-tomcat-9.0.43 tomcat
+
+sudo chmod 777 -R tomcat
+
+sudo sh /opt/tomcat/bin/startup.sh
+
+# create a soft link to start and stop tomcat
+
+sudo ln -s /opt/tomcat/bin/startup.sh /usr/bin/startTomcat
+sudo ln -s /opt/tomcat/bin/shutdown.sh /usr/bin/stopTomcat
+sudo startTomcat
+#sudo stopTomcat  to stop tomcat
+
+Tomcat server configuration:
+
+find / -name context.xml
+/opt/tomcat9/conf/context.xml
+/opt/tomcat9/webapps/host-manager/META-INF/context.xml
+/opt/tomcat9/webapps/manager/META-INF/context.xml
+
+  vi /webapps/manager/META-INF/context.xml 
+  vi /webapps/host-manager/META-INF/context.xml 
+  
+  vi /opt/tomcat/conf/tomcat-user.xml  # to add user
+	<user username="simon" password="passw0rd" roles="manager-gui,admin-gui"/>
+	
+  vi /opt/tomcat/conf/server.xml  # change port number
+  
+  
+  
